@@ -11,6 +11,7 @@ namespace WebApiMovieDB.Models
         public virtual DbSet<Actors> Actors { get; set; }
         public virtual DbSet<MovieCast> MovieCast { get; set; }
         public virtual DbSet<Movies> Movies { get; set; }
+        public virtual DbSet<UserInfo> UserInfo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -61,6 +62,38 @@ namespace WebApiMovieDB.Models
                     .HasMaxLength(4)
                     .IsUnicode(false)
                     .IsFixedLength();
+            });
+
+            modelBuilder.Entity<UserInfo>(entity =>
+            {
+                entity.HasKey(e => e.UserId);
+
+                entity.Property(e => e.UserId);
+
+                entity.Property(e => e.FirstName)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.LastName)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.UserName)
+                    .IsRequired()
+                    .HasMaxLength(30)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Email)
+                    .IsRequired()
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.Password)
+                    .IsRequired()
+                    .HasMaxLength(20)
+                    .IsUnicode(false);
             });
 
             OnModelCreatingPartial(modelBuilder);
